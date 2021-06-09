@@ -23,7 +23,7 @@ bot.catch((err, ctx) => {
 });
 
 bot.use(async (ctx, next) => {
-  // console.log(ctx.message);
+  console.log(ctx.message);
   await next();
 });
 
