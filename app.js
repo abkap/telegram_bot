@@ -1,13 +1,11 @@
 const { Telegraf } = require("telegraf");
 const { getRandomInt, sendPhotoToUser } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
+const { split } = require("./private.js");
 // constants and variables
 const AUTH_TOKEN = require("./private.js");
 var userMessage;
 
-// func
-
-// end func
 const bot = new Telegraf(AUTH_TOKEN);
 
 bot.command("start", (ctx) => {
@@ -23,6 +21,7 @@ bot.catch((err, ctx) => {
     err
   );
 });
+
 bot.use(async (ctx, next) => {
   // console.log(ctx.message);
   await next();
@@ -30,6 +29,7 @@ bot.use(async (ctx, next) => {
 
 bot.on("text", async (ctx) => {
   userMessage = ctx.message.text;
+  splitUserMessage = userMessage.split(" ");
   if (userMessage == "poll") {
     try {
       await ctx.telegram.sendPoll(ctx.message.from.id, "how are you", [
@@ -40,13 +40,12 @@ bot.on("text", async (ctx) => {
     } catch (err) {
       // console.log("error occured for poll : " + err);
     }
-  } else if (userMessage == "photo") {
+  } else if (userMessage.includes("photo") || userMessage.includes("image")) {
     ctx.reply("fetching...");
     sendPhotoToUser(ctx);
     // }
   } else if (predefinedMessages[userMessage]) {
     var index = getRandomInt(predefinedMessages[userMessage]);
-
     await ctx.reply(predefinedMessages[userMessage][index]);
   } else {
     ctx.reply(userMessage);

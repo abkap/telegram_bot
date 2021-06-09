@@ -24,4 +24,6 @@ async function sendPhotoToUser(obj) {
     }
   }
 }
+
+// exporting functions
 module.exports = { getRandomInt, sendPhotoToUser };
