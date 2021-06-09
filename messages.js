@@ -4,15 +4,23 @@ var messages = {
     "how are you ? ",
     "whoooo",
     "lets talk!",
-    "greeat!",
+    "nice to meet youu",
     "well, you looks good today",
-    "lets know each other",
+    "let's know each other",
   ],
-  "how are you": ["fine", "well", "I don't have feelings", "like your mood"],
+  "how are you": [
+    "fine",
+    "well, how are you ? ",
+    "I don't have feelings...",
+    "doin great!",
+  ],
   "who are you": [
     "i am a bot",
     "i am a piece of code",
     "i am an alien. hehe....",
   ],
+  fine: ["glad to hear that!", "ooh nice", "you are lucky", "like meee..."],
+  thanks: ["nevermind"],
+  thankyou: ["nevermind"],
 };
 module.exports = messages;

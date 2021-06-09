@@ -1,7 +1,9 @@
 const { Telegraf } = require("telegraf");
 const { getRandomInt } = require("./functions.js");
 const messages = require("./messages.js");
+// constants and variables
 const AUTH_TOKEN = require("./private.js");
+var message;
 
 const bot = new Telegraf(AUTH_TOKEN);
 
@@ -19,7 +21,6 @@ bot.use(async (ctx, next) => {
   console.log(ctx.message);
   await next();
 });
-var message;
 bot.on("text", async (ctx) => {
   message = ctx.message.text;
   if (message == "poll") {
@@ -40,4 +41,5 @@ bot.on("text", async (ctx) => {
   }
 });
 
+// final
 bot.launch();
