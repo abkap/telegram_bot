@@ -1,7 +1,9 @@
 const { Telegraf } = require("telegraf");
 const { getRandomInt, sendPhotoToUser } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
-const { split } = require("./private.js");
+
+const { factLibrary } = require("./facts");
+
 // constants and variables
 const AUTH_TOKEN = require("./private.js");
 var userMessage;
@@ -12,7 +14,7 @@ bot.command("start", (ctx) => {
   // console.log("form is : " + ctx.from);
   bot.telegram.sendMessage(
     ctx.chat.id,
-    "welcome to my bot yourFavoriteBuddy!!! "
+    "welcome to  bot yourFavoriteBuddy!!! "
   );
 });
 bot.catch((err, ctx) => {
@@ -40,7 +42,11 @@ bot.on("text", async (ctx) => {
     } catch (err) {
       // console.log("error occured for poll : " + err);
     }
-  } else if (userMessage.includes("photo") || userMessage.includes("image")) {
+  } else if (
+    userMessage.includes("photo") ||
+    userMessage.includes("image") ||
+    userMessage.includes("wallpaper")
+  ) {
     ctx.reply("fetching...");
     sendPhotoToUser(ctx);
     // }
@@ -48,7 +54,10 @@ bot.on("text", async (ctx) => {
     var index = getRandomInt(predefinedMessages[userMessage]);
     await ctx.reply(predefinedMessages[userMessage][index]);
   } else {
-    ctx.reply(userMessage);
+    var randInt = Math.floor(Math.random() * 100);
+    console.log(factLibrary[randInt]);
+
+    ctx.reply(factLibrary[randInt]);
   }
 });
 

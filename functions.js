@@ -25,5 +25,6 @@ async function sendPhotoToUser(obj) {
   }
 }
 
+// [0-9]+\.\s[a-zA-Z\s,\(\)0-9;\.\?'\-":!]+
 // exporting functions
 module.exports = { getRandomInt, sendPhotoToUser };
