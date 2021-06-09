@@ -1,29 +1,36 @@
 const { Telegraf } = require("telegraf");
-const { getRandomInt } = require("./functions.js");
-const messages = require("./messages.js");
+const { getRandomInt, sendPhotoToUser } = require("./functions.js");
+const predefinedMessages = require("./messages.js");
 // constants and variables
 const AUTH_TOKEN = require("./private.js");
-var message;
+var userMessage;
 
+// func
+
+// end func
 const bot = new Telegraf(AUTH_TOKEN);
 
 bot.command("start", (ctx) => {
-  console.log("form is : " + ctx.from);
+  // console.log("form is : " + ctx.from);
   bot.telegram.sendMessage(
     ctx.chat.id,
     "welcome to my bot yourFavoriteBuddy!!! "
   );
 });
 bot.catch((err, ctx) => {
-  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
+  console.log(
+    `Ooops, encountered an error for ${ctx.updateType}\n *and* `,
+    err
+  );
 });
 bot.use(async (ctx, next) => {
-  console.log(ctx.message);
+  // console.log(ctx.message);
   await next();
 });
+
 bot.on("text", async (ctx) => {
-  message = ctx.message.text;
-  if (message == "poll") {
+  userMessage = ctx.message.text;
+  if (userMessage == "poll") {
     try {
       await ctx.telegram.sendPoll(ctx.message.from.id, "how are you", [
         "fine",
@@ -31,13 +38,18 @@ bot.on("text", async (ctx) => {
         "none of your business",
       ]);
     } catch (err) {
-      console.log("error occured: " + err);
+      // console.log("error occured for poll : " + err);
     }
-  } else if (messages[message]) {
-    var index = getRandomInt(messages[message]);
-    ctx.reply(messages[message][index]);
+  } else if (userMessage == "photo") {
+    ctx.reply("fetching...");
+    sendPhotoToUser(ctx);
+    // }
+  } else if (predefinedMessages[userMessage]) {
+    var index = getRandomInt(predefinedMessages[userMessage]);
+
+    await ctx.reply(predefinedMessages[userMessage][index]);
   } else {
-    ctx.reply(message);
+    ctx.reply(userMessage);
   }
 });
 
