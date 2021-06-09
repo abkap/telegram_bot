@@ -17,7 +17,7 @@ async function sendPhotoToUser(obj) {
   } catch (err) {
     console.log("e is : ", err.response.error_code);
     if (err.response.error_code == 400) {
-      console.log("recalling sendPhotoToUser");
+      console.log("recalling sendPhotoToUser...");
       sendPhotoToUser(obj);
     } else {
       console.log("photo send>>>");
