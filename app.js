@@ -1,13 +1,11 @@
 const { Telegraf } = require("telegraf");
 const { getRandomInt, sendPhotoToUser } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
-
 const { factLibrary } = require("./facts");
+const AUTH_TOKEN = require("./private.js");
 
 // constants and variables
-const AUTH_TOKEN = require("./private.js");
 var userMessage;
-
 const bot = new Telegraf(AUTH_TOKEN);
 
 bot.command("start", (ctx) => {
@@ -48,6 +46,7 @@ bot.on("text", async (ctx) => {
     userMessage.includes("wallpaper")
   ) {
     ctx.reply("fetching...");
+
     sendPhotoToUser(ctx);
     // }
   } else if (predefinedMessages[userMessage]) {
