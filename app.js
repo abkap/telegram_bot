@@ -7,6 +7,10 @@ const AUTH_TOKEN = require("./private.js");
 // constants and variables
 var userMessage;
 const bot = new Telegraf(AUTH_TOKEN);
+const helpCommand = [
+  "welcome to yourFavoriteBuddy",
+  "use 'wallpaper' or 'image' or 'photo'  to download a photo",
+];
 
 bot.command("start", (ctx) => {
   // console.log("form is : " + ctx.from);
@@ -14,6 +18,12 @@ bot.command("start", (ctx) => {
     ctx.chat.id,
     "welcome to  bot yourFavoriteBuddy!!! "
   );
+});
+
+bot.command("help", (ctx) => {
+  helpCommand.forEach((msg) => {
+    bot.telegram.sendMessage(ctx.chat.id, msg);
+  });
 });
 bot.catch((err, ctx) => {
   console.log(

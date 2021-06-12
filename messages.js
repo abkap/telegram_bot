@@ -22,5 +22,6 @@ var messages = {
   fine: ["glad to hear that!", "ooh nice", "you are lucky", "like meee..."],
   thanks: ["nevermind"],
   thankyou: ["nevermind"],
+  help: ["type /help to see available commands"],
 };
 module.exports = messages;
