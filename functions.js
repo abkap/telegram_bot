@@ -1,4 +1,7 @@
+// required
 const fs = require("fs");
+
+// all functions
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -11,7 +14,7 @@ async function sendPhotoToUser(obj) {
     .split(",");
   availableCodesArrayLength = availableCodesArray.length;
 
-  var intForPhoto = randomInt(0, 10);
+  var intForPhoto = randomInt(0, availableCodesArrayLength);
   var imageId = Number(availableCodesArray[intForPhoto]);
 
   // valid imageId = 8051965;
@@ -30,6 +33,5 @@ async function sendPhotoToUser(obj) {
   }
 }
 
-// [0-9]+\.\s[a-zA-Z\s,\(\)0-9;\.\?'\-":!]+
 // exporting functions
 module.exports = { sendPhotoToUser, randomInt };
