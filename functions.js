@@ -5,6 +5,7 @@ const fs = require("fs");
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
 async function sendPhotoToUser(obj) {
   var availableCodesArrayLength;
   var availableCodesArray;

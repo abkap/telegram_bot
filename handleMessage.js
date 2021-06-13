@@ -6,7 +6,7 @@ module.exports = async function handleMessage(msg, ctx) {
     if (msg.length) userMessage += item + " ";
   });
   userMessage = userMessage.trimEnd();
-  console.log(msg.length);
+  //   console.log(msg.length);
   if (msg.length == 1 || predefinedMessages[userMessage]) {
     if (userMessage == "poll") {
       try {
@@ -38,7 +38,8 @@ module.exports = async function handleMessage(msg, ctx) {
       ctx.reply("command not found !");
     }
   } else if (msg instanceof Array) {
-    console.log("param is an array");
+    // this will be always true since we are passing array as argument in app.js
+    // console.log("param is an array");
     // for something like 'wallpaper 10'
     if (
       (msg[0].includes("wallpaper") ||
@@ -46,16 +47,14 @@ module.exports = async function handleMessage(msg, ctx) {
         msg[0].includes("photo")) &&
       !isNaN(Number(msg[1]))
     ) {
-      console.log("this is what i want");
       //   wallpaper 10
       var limit = Number(msg[1]);
       ctx.reply(`fetching ${limit} photos...`);
       for (var i = 0; i < limit; i++) {
-        //   sending limit no of photos
+        //   sending limit photos
         sendPhotoToUser(ctx);
       }
     } else {
-      console.log("not what i want");
       ctx.reply("command not found !!");
     }
     //   do something
