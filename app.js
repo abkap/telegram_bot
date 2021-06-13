@@ -1,7 +1,7 @@
 const { Telegraf } = require("telegraf");
 const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
-const { factLibrary } = require("./facts");
+
 const AUTH_TOKEN = require("./private.js");
 
 // constants and variables
@@ -67,10 +67,7 @@ bot.on("text", async (ctx) => {
 
     await ctx.reply(predefinedMessages[userMessage][index]);
   } else {
-    var randInt = Math.floor(Math.random() * 100);
-    console.log(factLibrary[randInt]);
-
-    ctx.reply(factLibrary[randInt]);
+    ctx.reply("command not found !");
   }
 });
 
