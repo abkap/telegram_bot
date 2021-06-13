@@ -1,20 +1,24 @@
-function getRandomInt(msg) {
-  var randomInt = Math.floor(Math.random() * 10);
-  if (randomInt < msg.length) {
-    console.log(randomInt);
-    return randomInt;
-  } else {
-    return 0;
-  }
+const fs = require("fs");
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 }
-
 async function sendPhotoToUser(obj) {
-  var imageId = Math.floor(Math.random() * 100000000);
+  var availableCodesArrayLength;
+  var availableCodesArray;
+  availableCodesArray = fs
+    .readFileSync("./availableCodes.txt")
+    .toString()
+    .split(",");
+  availableCodesArrayLength = availableCodesArray.length;
 
-  // imageId = 8051965;
+  var intForPhoto = randomInt(0, 10);
+  var imageId = Number(availableCodesArray[intForPhoto]);
+
+  // valid imageId = 8051965;
   var imageFile = `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
   try {
     await obj.replyWithPhoto(imageFile);
+    console.log(`image send seccessfully (imageId=${imageId})`);
   } catch (err) {
     console.log("e is : ", err.response.error_code);
     if (err.response.error_code == 400) {
@@ -28,4 +32,4 @@ async function sendPhotoToUser(obj) {
 
 // [0-9]+\.\s[a-zA-Z\s,\(\)0-9;\.\?'\-":!]+
 // exporting functions
-module.exports = { getRandomInt, sendPhotoToUser };
+module.exports = { sendPhotoToUser, randomInt };

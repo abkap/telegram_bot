@@ -1,5 +1,5 @@
 const { Telegraf } = require("telegraf");
-const { getRandomInt, sendPhotoToUser } = require("./functions.js");
+const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
 const { factLibrary } = require("./facts");
 const AUTH_TOKEN = require("./private.js");
@@ -60,7 +60,11 @@ bot.on("text", async (ctx) => {
     sendPhotoToUser(ctx);
     // }
   } else if (predefinedMessages[userMessage]) {
-    var index = getRandomInt(predefinedMessages[userMessage]);
+    // var index = getRandomInt(predefinedMessages[userMessage]);
+    // getRandomInt function replaced with randomInt() function
+
+    var index = randomInt(0, predefinedMessages[userMessage].length);
+
     await ctx.reply(predefinedMessages[userMessage][index]);
   } else {
     var randInt = Math.floor(Math.random() * 100);
