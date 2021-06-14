@@ -13,7 +13,7 @@ bot.command("start", (ctx) => {
   // console.log("form is : " + ctx.from);
   bot.telegram.sendMessage(
     ctx.chat.id,
-    "welcome to  bot yourFavoriteBuddy!!! "
+    "welcome to  bot yourFavoriteBuddy!!! \n /help to know more"
   );
 });
 // loading file containing image_id data
@@ -29,6 +29,9 @@ availableCodesArrayLength = availableCodesArray.length;
 const helpMessage = `
 >Welcome to yourFavoriteBuddy,
 >type 'photo' or 'wallpaper' or 'image' to get wallpapers
+(eg., wallpaper)
+>type wallpaper count to get count no of photos
+(eg., wallpaper 10)
 `;
 bot.command("help", (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, helpMessage);
