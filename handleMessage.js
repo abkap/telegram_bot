@@ -59,6 +59,7 @@ module.exports = async function handleMessage(
         //   sending limit photos
         sendPhotoToUser(ctx, availableCodesArray, availableCodesArrayLength);
       }
+      ctx.reply(`sent ${limit} photos !`);
     } else {
       ctx.reply("command not found !!");
     }
