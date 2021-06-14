@@ -5,7 +5,7 @@ module.exports = async function handleMessage(msg, ctx) {
   msg.forEach((item) => {
     if (msg.length) userMessage += item + " ";
   });
-  userMessage = userMessage.trimEnd();
+  userMessage = userMessage.trimEnd().trimStart();
   //   console.log(msg.length);
   if (msg.length == 1 || predefinedMessages[userMessage]) {
     if (userMessage == "poll") {
