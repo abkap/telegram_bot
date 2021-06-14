@@ -1,6 +1,11 @@
 const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
-module.exports = async function handleMessage(msg, ctx) {
+module.exports = async function handleMessage(
+  msg,
+  ctx,
+  availableCodesArray,
+  availableCodesArrayLength
+) {
   var userMessage = "";
   msg.forEach((item) => {
     if (msg.length) userMessage += item + " ";
@@ -25,7 +30,7 @@ module.exports = async function handleMessage(msg, ctx) {
     ) {
       ctx.reply("fetching...");
 
-      sendPhotoToUser(ctx);
+      sendPhotoToUser(ctx, availableCodesArray, availableCodesArrayLength);
       // }
     } else if (predefinedMessages[userMessage]) {
       // var index = getRandomInt(predefinedMessages[userMessage]);
@@ -52,7 +57,7 @@ module.exports = async function handleMessage(msg, ctx) {
       ctx.reply(`fetching ${limit} photos...`);
       for (var i = 0; i < limit; i++) {
         //   sending limit photos
-        sendPhotoToUser(ctx);
+        sendPhotoToUser(ctx, availableCodesArray, availableCodesArrayLength);
       }
     } else {
       ctx.reply("command not found !!");

@@ -3,6 +3,7 @@ const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
 const handleMessage = require("./handleMessage");
 const AUTH_TOKEN = require("./private.js");
+const fs = require("fs");
 
 // constants and variables
 var userMessage;
@@ -15,6 +16,15 @@ bot.command("start", (ctx) => {
     "welcome to  bot yourFavoriteBuddy!!! "
   );
 });
+// loading file containing image_id data
+var availableCodesArrayLength;
+var availableCodesArray;
+availableCodesArray = fs
+  .readFileSync("./availableCodes.txt")
+  .toString()
+  .split(",");
+availableCodesArrayLength = availableCodesArray.length;
+
 // help command msg
 const helpMessage = `
 >Welcome to yourFavoriteBuddy,
@@ -40,7 +50,12 @@ bot.on("text", async (ctx) => {
 
   splitUserMessage = userMessage.split(" ");
   // function
-  handleMessage(splitUserMessage, ctx);
+  handleMessage(
+    splitUserMessage,
+    ctx,
+    availableCodesArray,
+    availableCodesArrayLength
+  );
 });
 
 // final

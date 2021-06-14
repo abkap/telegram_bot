@@ -6,15 +6,11 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-async function sendPhotoToUser(obj) {
-  var availableCodesArrayLength;
-  var availableCodesArray;
-  availableCodesArray = fs
-    .readFileSync("./availableCodes.txt")
-    .toString()
-    .split(",");
-  availableCodesArrayLength = availableCodesArray.length;
-
+async function sendPhotoToUser(
+  obj,
+  availableCodesArray,
+  availableCodesArrayLength
+) {
   var intForPhoto = randomInt(0, availableCodesArrayLength);
   var imageId = Number(availableCodesArray[intForPhoto]);
 
