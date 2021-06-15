@@ -29,8 +29,13 @@ module.exports = async function handleMessage(
       userMessage.includes("wallpaper")
     ) {
       ctx.reply("fetching...");
-
-      sendPhotoToUser(ctx, availableCodesArray, availableCodesArrayLength);
+      console.time("sending photo");
+      await sendPhotoToUser(
+        ctx,
+        availableCodesArray,
+        availableCodesArrayLength
+      );
+      console.timeEnd("sending photo");
       // }
     } else if (predefinedMessages[userMessage]) {
       // var index = getRandomInt(predefinedMessages[userMessage]);
@@ -55,6 +60,7 @@ module.exports = async function handleMessage(
       //   wallpaper 10
       var limit = Number(msg[1]);
       ctx.reply(`fetching ${limit} photos...`);
+
       for (var i = 0; i < limit; i++) {
         //   sending limit photos
         sendPhotoToUser(ctx, availableCodesArray, availableCodesArrayLength);
