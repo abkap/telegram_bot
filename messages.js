@@ -25,5 +25,6 @@ var messages = {
   help: ["type /help to see available commands"],
   "what can you do":
     "I can send you wallpaper by wallpaper or photo or image command",
+  "how can i make use of you": "type /help command",
 };
 module.exports = messages;
