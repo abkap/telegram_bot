@@ -59,6 +59,7 @@ module.exports = async function handleMessage(
     ) {
       //   wallpaper 10
       var limit = Number(msg[1]);
+
       ctx.reply(`fetching ${limit} photos...`);
 
       for (var i = 0; i < limit; i++) {
