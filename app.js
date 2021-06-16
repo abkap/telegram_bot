@@ -52,7 +52,6 @@ bot.use(async (ctx, next) => {
 });
 
 bot.on("text", async (ctx) => {
-  console.log("usrmessage : " + userMessage);
   userMessage = ctx.message.text.toLocaleLowerCase();
 
   splitUserMessage = userMessage.split(" ");
