@@ -1,6 +1,5 @@
 const { Telegraf } = require("telegraf");
-const { sendPhotoToUser, randomInt } = require("./functions.js");
-const predefinedMessages = require("./messages.js");
+
 const handleMessage = require("./handleMessage");
 const AUTH_TOKEN = require("./private.js");
 const fs = require("fs");
@@ -8,6 +7,10 @@ const fs = require("fs");
 // constants and variables
 var userMessage;
 const bot = new Telegraf(AUTH_TOKEN);
+
+bot.telegram.getMe().then((botInfo) => {
+  bot.options.username = botInfo.username;
+});
 
 bot.command("start", (ctx) => {
   // console.log("form is : " + ctx.from);
@@ -49,6 +52,7 @@ bot.use(async (ctx, next) => {
 });
 
 bot.on("text", async (ctx) => {
+  console.log("usrmessage : " + userMessage);
   userMessage = ctx.message.text.toLocaleLowerCase();
 
   splitUserMessage = userMessage.split(" ");
