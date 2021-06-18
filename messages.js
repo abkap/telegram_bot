@@ -27,5 +27,7 @@ var messages = {
     "I can send you wallpaper by wallpaper or photo or image command",
   "how can i make use of you": "type /help command",
   "how do you do": "how do you do ? ",
+  "how can you help me": "type /help",
+  "who is your owner": "That is a mystery",
 };
 module.exports = messages;
