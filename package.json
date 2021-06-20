@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ffmpeg-static": "^4.4.0",
     "telegraf": "^4.3.0",
     "ytdl-core": "^4.8.2"
   }
