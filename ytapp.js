@@ -3,6 +3,8 @@ const ytdl = require("ytdl-core");
 const cp = require("child_process");
 const readline = require("readline");
 const ffmpeg = require("ffmpeg-static");
+// proudly :)
+// code copied from https://github.com/fent/node-ytdl-core/blob/master/example/ffmpeg.js;
 
 // function defined here
 module.exports = function renderVideoAndAudio() {
