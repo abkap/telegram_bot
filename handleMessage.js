@@ -1,5 +1,6 @@
 const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
+const renderVideoAndAudio = require("./ytapp");
 module.exports = async function handleMessage(
   msg,
   ctx,
@@ -44,6 +45,19 @@ module.exports = async function handleMessage(
       var index = randomInt(0, predefinedMessages[userMessage].length);
 
       await ctx.reply(predefinedMessages[userMessage][index]);
+    } else if (
+      userMessage.includes("youtube.com/") ||
+      userMessage.includes("youtu.be/")
+    ) {
+      console.log(userMessage);
+      try {
+        renderVideoAndAudio(userMessage);
+        ctx.reply("ok i will download that");
+      } catch (e) {
+        ctx.reply("sorry!! an error occured");
+        console.error("error occured while downloading...");
+        console.log(e);
+      }
     } else {
       ctx.reply("command not found !");
     }

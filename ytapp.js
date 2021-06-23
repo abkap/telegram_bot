@@ -3,11 +3,9 @@ const ytdl = require("ytdl-core");
 const cp = require("child_process");
 const readline = require("readline");
 const ffmpeg = require("ffmpeg-static");
-// function called here
-renderVideoAndAudio();
+
 // function defined here
-function renderVideoAndAudio() {
-  const ref = "https://www.youtube.com/watch?v=aqz-KE-bpKQ";
+module.exports = function renderVideoAndAudio() {
   const tracker = {
     start: Date.now(),
     audio: { downloaded: 0, total: Infinity },
@@ -140,4 +138,4 @@ function renderVideoAndAudio() {
   });
   audio.pipe(ffmpegProcess.stdio[4]);
   video.pipe(ffmpegProcess.stdio[5]);
-}
+};
