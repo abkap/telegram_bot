@@ -7,7 +7,7 @@ const ffmpeg = require("ffmpeg-static");
 // code copied from https://github.com/fent/node-ytdl-core/blob/master/example/ffmpeg.js;
 
 // function defined here
-module.exports = function renderVideoAndAudio() {
+module.exports = function renderVideoAndAudio(ref) {
   const tracker = {
     start: Date.now(),
     audio: { downloaded: 0, total: Infinity },
