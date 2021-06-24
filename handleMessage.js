@@ -1,18 +1,17 @@
 const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
 const renderVideoAndAudio = require("./ytapp");
+const getAIResponse = require("./smartAI.js");
 module.exports = async function handleMessage(
   msg,
   ctx,
   availableCodesArray,
   availableCodesArrayLength
 ) {
-  var userMessage = "";
-  msg.forEach((item) => {
-    if (msg.length) userMessage += item + " ";
-  });
+  var userMessage = msg.join(" ");
   userMessage = userMessage.trimEnd().trimStart();
   //   console.log(msg.length);
+  // msg is array
   if (msg.length == 1 || predefinedMessages[userMessage]) {
     if (userMessage == "poll") {
       try {
@@ -59,7 +58,15 @@ module.exports = async function handleMessage(
         console.log(e);
       }
     } else {
-      ctx.reply("command not found !");
+      getAIResponse(userMessage, (res, err) => {
+        if (err) {
+          console.log(err);
+          ctx.reply("some error occured");
+        } else {
+          console.log("smart ai replies : " + res["cnt"]);
+          ctx.reply(res["cnt"]);
+        }
+      });
     }
   } else if (msg instanceof Array) {
     // this will be always true since we are passing array as argument in app.js
@@ -81,7 +88,16 @@ module.exports = async function handleMessage(
         sendPhotoToUser(ctx, availableCodesArray, availableCodesArrayLength);
       }
     } else {
-      ctx.reply("command not found !!");
+      // same smart reply
+      getAIResponse(userMessage, (res, err) => {
+        if (err) {
+          console.log(err);
+          ctx.reply("some error occured");
+        } else {
+          console.log("smart ai replies : " + res["cnt"]);
+          ctx.reply(res["cnt"]);
+        }
+      });
     }
     //   do something
   } else {

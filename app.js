@@ -1,7 +1,7 @@
 const { Telegraf } = require("telegraf");
 
 const handleMessage = require("./handleMessage");
-const AUTH_TOKEN = require("./private.js");
+const { AUTH_TOKEN } = require("./private.js");
 const fs = require("fs");
 
 // constants and variables
