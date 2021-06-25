@@ -30,10 +30,10 @@ availableCodesArrayLength = availableCodesArray.length;
 
 // help command msg
 const helpMessage = `
->Welcome to yourFavoriteBuddy,
->type 'photo' or 'wallpaper' or 'image' to get wallpapers
+Welcome to yourFavoriteBuddy,
+type 'photo' or 'wallpaper' or 'image' to get wallpapers
 (eg., wallpaper)
->type wallpaper count to get count no of photos
+type wallpaper count to get count no of photos
 (eg., wallpaper 10)
 `;
 bot.command("help", (ctx) => {
