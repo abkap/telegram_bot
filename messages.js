@@ -19,7 +19,7 @@ var messages = {
     "i am a piece of code",
     "i am an alien. hehe....",
   ],
-  fine: ["glad to hear that!", "ooh nice", "you are lucky", "like meee..."],
+  fine: ["glad to hear that!", "thank you "],
   thanks: ["nevermind"],
   thankyou: ["nevermind"],
   help: ["type /help to see available commands"],
