@@ -2,6 +2,8 @@ const { sendPhotoToUser, randomInt } = require("./functions.js");
 const predefinedMessages = require("./messages.js");
 const renderVideoAndAudio = require("./ytapp");
 const getAIResponse = require("./smartAI.js");
+const fs = require("fs");
+
 module.exports = async function handleMessage(
   msg,
   ctx,
@@ -9,7 +11,11 @@ module.exports = async function handleMessage(
   availableCodesArrayLength
 ) {
   var userMessage = msg.join(" ");
-  userMessage = userMessage.trimEnd().trimStart();
+
+  userMessage = userMessage.trimEnd();
+  userMessage = userMessage.trimStart();
+  var userMessageId = userMessage.split("/")[userMessage.split("/").length - 1];
+
   //   console.log(msg.length);
   // msg is array
   if (msg.length == 1 || predefinedMessages[userMessage]) {
@@ -44,20 +50,35 @@ module.exports = async function handleMessage(
       var index = randomInt(0, predefinedMessages[userMessage].length);
 
       await ctx.reply(predefinedMessages[userMessage][index]);
-    } /* else if (
+    } else if (
       userMessage.includes("youtube.com/") ||
       userMessage.includes("youtu.be/")
     ) {
-      console.log(userMessage);
+      // console.log("user message is :", userMessage);
+      // console.log("const message is :", "https://youtu.be/fxNlpQYRz7s");
+      // console.log(
+      //   "length usermsg = ",
+      //   userMessage.length,
+      //   "\n length const = ",
+      //   "https://youtu.be/fxNlpQYRz7s".length
+      // );
+      // console.log(userMessage == "https://youtu.be/fxNlpQYRz7s");
       try {
-        renderVideoAndAudio(userMessage);
-        ctx.reply("ok i will download that");
+        renderVideoAndAudio(userMessage, async () => {
+          // run this after downloaded
+          // ctx.replyWithVideo("out.mkv");
+          await ctx.replyWithVideo({ source: `./${userMessageId}.mkv` });
+          console.log("video uploading finished...");
+          fs.unlinkSync(`./${userMessageId}.mkv`);
+          console.log("file removed successfully");
+        });
+        ctx.reply("ok i will download that \nplease wait...");
       } catch (e) {
         ctx.reply("sorry!! an error occured");
         console.error("error occured while downloading...");
         console.log(e);
       }
-    } */ else {
+    } else {
       getAIResponse(userMessage, (res, err) => {
         if (err) {
           console.log(err);

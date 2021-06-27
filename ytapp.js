@@ -1,13 +1,25 @@
-const fs = require("fs");
-const ytdl = require("ytdl-core");
+/**
+ * Reencode audio & video without creating files first
+ *
+ * Requirements: ffmpeg, ether via a manual installation or via ffmpeg-static
+ *
+ * If you need more complex features like an output-stream you can check the older, more complex example:
+ * https://github.com/fent/node-ytdl-core/blob/cc6720f9387088d6253acc71c8a49000544d4d2a/example/ffmpeg.js
+ */
+
+// Buildin with nodejs
 const cp = require("child_process");
 const readline = require("readline");
+// External modules
+const ytdl = require("ytdl-core");
 const ffmpeg = require("ffmpeg-static");
-// proudly :)
-// code copied from https://github.com/fent/node-ytdl-core/blob/master/example/ffmpeg.js;
+const ref = "https://youtu.be/fxNlpQYRz7s";
 
-// function defined here
-module.exports = function renderVideoAndAudio(ref) {
+// func
+module.exports = function renderVideoAndAudio(ref, callback) {
+  var videoId = ref.split("/")[ref.split("/").length - 1];
+  console.log(videoId);
+
   const tracker = {
     start: Date.now(),
     audio: { downloaded: 0, total: Infinity },
@@ -100,7 +112,7 @@ module.exports = function renderVideoAndAudio(ref) {
       "-c:v",
       "copy",
       // Define output file
-      "out.mkv",
+      `${videoId}.mkv`,
     ],
     {
       windowsHide: true,
@@ -121,6 +133,7 @@ module.exports = function renderVideoAndAudio(ref) {
     // Cleanup
     process.stdout.write("\n\n\n\n");
     clearInterval(progressbarHandle);
+    callback();
   });
 
   // Link streams

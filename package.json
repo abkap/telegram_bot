@@ -12,6 +12,6 @@
     "ffmpeg-static": "^4.4.0",
     "telegraf": "^4.3.0",
     "unirest": "^0.6.0",
-    "ytdl-core": "^4.8.2"
+    "ytdl-core": "^4.8.3"
   }
 }
