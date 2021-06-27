@@ -44,7 +44,7 @@ module.exports = async function handleMessage(
       var index = randomInt(0, predefinedMessages[userMessage].length);
 
       await ctx.reply(predefinedMessages[userMessage][index]);
-    } else if (
+    } /* else if (
       userMessage.includes("youtube.com/") ||
       userMessage.includes("youtu.be/")
     ) {
@@ -57,7 +57,7 @@ module.exports = async function handleMessage(
         console.error("error occured while downloading...");
         console.log(e);
       }
-    } else {
+    } */ else {
       getAIResponse(userMessage, (res, err) => {
         if (err) {
           console.log(err);
