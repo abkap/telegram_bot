@@ -67,7 +67,7 @@ module.exports = async function handleMessage(
         renderVideoAndAudio(userMessage, async () => {
           // run this after downloaded
           // ctx.replyWithVideo("out.mkv");
-          await ctx.replyWithVideo({ source: `./${userMessageId}.mkv` });
+          await ctx.replyWithDocument({ source: `./${userMessageId}.mkv` });
           console.log("video uploading finished...");
           fs.unlinkSync(`./${userMessageId}.mkv`);
           console.log("file removed successfully");
