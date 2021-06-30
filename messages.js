@@ -30,5 +30,6 @@ var messages = {
   "how do you do": ["how do you do ? "],
   "how can you help me": ["type /help"],
   "who is your owner": ["That is a mystery"],
+  "How old are you": ["I am 205 in the weekend, Just kidding !😁 "],
 };
 module.exports = messages;
